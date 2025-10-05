@@ -11,6 +11,7 @@ componente de un nombre y una cantidad de stock.
 Criterios de Aceptacion:
 -------------------------------
 1 Projecto desarrollado en SpringBoot usando programacion reactiva (WebFlux) sobre Arquitectura Hexagonal
+-----------------------------------------------------------------------------------------------------------
 
 * Se desarrolló bajo Patron de Arquitectura: Hexagonal.
 La estructura arquitectónica del proyecto es asi:
@@ -22,19 +23,56 @@ La estructura arquitectónica del proyecto es asi:
 <img width="716" height="129" alt="image" src="https://github.com/user-attachments/assets/5fd9fd0d-3d1a-4b35-8a12-b2366e9a2b2a" />
 
 2 Base de datos seleccionada: MySQL:
+---------------------------------------
 
 Como el desarrollo es bajo WebFlux (Rx), es fundmental trabajar con R2DBC (Reactive Relational Database Connectivity), puesto que MySQL por default gestiona con JDBC (el cual es bloquente) pero WebFlux es NO bloqueante
 osea que R2DBC es el mecanismo usado por webflux para garantizar consultas a Bases de Datos de manera No bloqueantes (Soportando Mono / Flux) elementos fundamentales de RxJava y Project Reactor de Spring
 
 <img width="1209" height="441" alt="image" src="https://github.com/user-attachments/assets/38545387-7b9f-4209-915d-51502d3f548c" />
 
+Modelo Entidad Relacion (MER)
+
+CREATE DATABASE IF NOT EXISTS seti_db;
+USE seti_db;
+
+CREATE TABLE `franchises` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `franchises` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `products` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `branch_id` bigint NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `stock` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `branch_id` (`branch_id`),
+  CONSTRAINT `branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
 3 Las respuestas de los servicios deben ser encadenadas con operadores MAP, FLATMAP, MERGE, Etc.
+---------------------------------------------------------------------------------------------------
+
 Todo el funcionamiento de los servicios de la capa Aplicaction (Services: FranchiseService, BranchService, ProductService) trabajan con streams encadenando la respuesta a Map, FlatMap, segun sea necesario
 
 4 Use correctamente los señales onNext, onError, onComplete.
+---------------------------------------------------------------
+
 Todo el funcionamiento de los servicios de la capa Aplicaction (Services: FranchiseService, BranchService, ProductService) trabajan con streams encadenando la respuesta a Map, FlatMap, segun sea necesario
 
 5 Pruebas Unitarias en Servicios (deben superar el 80% de cobertura):
+-------------------------------------------------------------------------
+
 Todos los servicios de la capa Application tienen cobertura del 85%, pruebas unitarias realizadas con Junit & Mockito, gracias al plugin de Jacoco, se puede observar la cobertura en formato HTML del site
 <img width="1907" height="404" alt="image" src="https://github.com/user-attachments/assets/e3350c13-e283-4e9c-beb4-58ff3378f0d8" />
 
@@ -57,7 +95,9 @@ Todas las funcionalidades de la API están contempladas en los siguientes servic
 Servicios de la API
 ------------------------
 
-1. 	Adicionar una Franqucia:
+1	Adicionar una Franqucia:
+----------------------------------
+
 	Protocol: POST
 	EndPoint: /localhost:8080/api/franchises"
    
@@ -73,7 +113,8 @@ Servicios de la API
 		"branches": []
 	}
    
-2. 	Listar todas las franchises
+3 	Listar todas las franchises
+-------------------------------------
 	Protocol: GET
 	EndPoint: /localhost:8080/api/franchises"
    
@@ -88,7 +129,8 @@ Servicios de la API
 	}
 
 
-3. 	Adicioanr una Sucursal a una franquicia
+4 	Adicioanr una Sucursal a una franquicia
+----------------------------------------------
 	Protocol: POST
 	EndPoint: /localhost:8080/api/branches/{franchiseId}"
 	
@@ -107,7 +149,8 @@ Servicios de la API
 		"products": []
 	}
 
-4. 	Actualiar nombre de Sucursal 
+5 	Actualiar nombre de Sucursal 
+-------------------------------------
 	Protocol: PUT
 	EndPoint: http://localhost:8080/api/branches/{id}?name={nombre nuevo}"
 	
@@ -123,7 +166,8 @@ Servicios de la API
 		"franchiseId": 17
 	}
 
-5. 	Adicioanr un producto a una sucursal
+6 	Adicioanr un producto a una sucursal
+------------------------------------------
 	Protocol: POST
 	EndPoint: http://localhost:8080/api/products/{branchId}"
 	
@@ -143,7 +187,8 @@ Servicios de la API
 		"stock": 2500
 	}
 	
-6. 	Borrar un producto
+7 	Borrar un producto
+--------------------------------
 	Protocol: DEL
 	EndPoint: http://localhost:8080/api/products/{id}"
 	
@@ -156,7 +201,8 @@ Servicios de la API
 	nada, estatus= 200
 	
 	
-7. 	Modificar Stock de un producto
+8 	Modificar Stock de un producto
+-------------------------------------
 	Protocol: PUT
 	EndPoint: http://localhost:8080/api/products/{id}/{Stock}"
 	
@@ -173,7 +219,8 @@ Servicios de la API
 		"branchId": 4
 	}
 		
-8. 	Encontrar maximo stock de producto en una sucursl:
+9 	Encontrar maximo stock de producto en una sucursl:
+-----------------------------------------------------------
 	Protocol: GET
 	EndPoint: http://localhost:8080/api/products/max/{branchid}"
 	
@@ -191,7 +238,8 @@ Servicios de la API
 	}
 		
 		
-9. 	Actualizar nombre de un producto
+10 	Actualizar nombre de un producto
+----------------------------------------
 	Protocol: PUT
 	EndPoint: http://localhost:8080/api/products/{id}"
 	
