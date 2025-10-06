@@ -1,0 +1,14 @@
+
+
+   Oo    OooOOo.  ooOoOOo                       .oOOOo.  o.OOoOoo oOoOOoOOo ooOoOOo 
+  o  O   O     `O    O                          o     o   O           o        O    
+ O    o  o      O    o                          O.        o           o        o    
+oOooOoOo O     .o    O                           `OOoo.   ooOO        O        O    
+o      O oOooOO'     o          ooooooooo             `O  O           o        o    
+O      o o           O                                 o  o           O        O    
+o      O O           O                          O.    .O  O           O        O    
+O.     O o'       ooOOoOo                        `oooO'  ooOooOoO     o'    ooOOoOo 
+                                                                                    
+                                                                                    
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}

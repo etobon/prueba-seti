@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-seti
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SLealways1250*$
+      MYSQL_DATABASE: seti_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./src/main/resources/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+
+  api:
+    build: .
+    container_name: seti-api
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_R2DBC_URL: r2dbc:mysql://mysql:3306/seti_db
+      SPRING_R2DBC_USERNAME: root
+      SPRING_R2DBC_PASSWORD: SLealways1250*$
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
