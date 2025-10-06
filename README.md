@@ -1,4 +1,4 @@
-Prueba de Ingreso Seti: (Desarrollo de Api-Rest Spring WebFlux)
+[Seti-API.postman_collection.json](https://github.com/user-attachments/files/22728870/Seti-API.postman_collection.json)Prueba de Ingreso Seti: (Desarrollo de Api-Rest Spring WebFlux)
 ------------------------------
 
 Ejercicio # 1:
@@ -95,6 +95,33 @@ Este comando generará el archivo .jar (Ejecutable) de la Api.jar dentro de la c
 java -jar [prueba-0.0.1-SNAPSHOT.jar] (archivo .jar generado)
 
 <img width="1785" height="531" alt="image" src="https://github.com/user-attachments/assets/618b237f-ebe5-44ff-a17c-aa9a0d96cd79" />
+
+Ejecución del sistema:
+---
+
+Para la correcta ejecución del sistema (webFlux API), se creó configuración de Docker la cual levanta dos contenedores:
+Contenedor 1: BD MySQL
+Contenedor 2: API (Propiamente).
+
+Ambos interconectados 
+
+Pasos para la ejecución correcta:
+
+En primer lugar, se debe descargar el proyecto desde el repositorio de GitHub (Clonar Proyecto) y ejecugtar los siguientes comandos desde una terminal (CMD, GitBash, etc)
+
+Paso 1: docker compose up -d --build (Este comando permite construir los contenedores Docker de acuerdo con la configuración indicada en docker-compose.yml
+
+Paso 2: Esperar el build de los contenedores (hasta que esté completado). como aparece a continuación:
+        <img width="1342" height="651" alt="image" src="https://github.com/user-attachments/assets/927bd363-52b8-439f-82b4-f44a1ab880d5" />
+		
+Paso 3: docker ps (Este permite verificar la ejecución los procesos de docker). como aparece a continuación:
+		<img width="1422" height="177" alt="image" src="https://github.com/user-attachments/assets/797414d8-8378-461d-928a-50f24dbacd69" />
+
+Ya con esos pasos, los dos contendedores estan arriba y se pueden consumir los servicios del API desde Postman, Curl o cualquier cliente.  como aparece a continuación:		
+
+Consumo servicios desde Postman:
+--------
+<img width="1280" height="701" alt="image" src="https://github.com/user-attachments/assets/9e4fead5-b125-4562-a374-2328bbfacf89" />
 
 Todas las funcionalidades de la API están contempladas en los siguientes servicios:
 
@@ -264,6 +291,263 @@ Servicios de la API
 		"name": "Producto 7",
 		"stock": 2100
 	}
+
+
+Collection de Postman para su ejecución
+------
+Coleccion de Postman lista para ser copiada y pegada en Postman para consumir servicios de API.
+
+[Up{
+	"info": {
+		"_postman_id": "0808aa64-8017-49b4-8199-506adf3b9c2f",
+		"name": "Seti-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4816345",
+		"_collection_link": "https://solar-capsule-242600.postman.co/workspace/xxx~54389755-fdef-499f-8a95-ee897d4c9dbc/collection/4816345-0808aa64-8017-49b4-8199-506adf3b9c2f?action=share&source=collection_link&creator=4816345"
+	},
+	"item": [
+		{
+			"name": "get-franchises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/franchises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"franchises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-franchise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n\t\t\"name\" : \"Brach 2\"\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/franchises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"franchises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add branch inside franchise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Brach 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/branches/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"branches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update name of branches",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/branches/1?name=Sucursal 1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"branches",
+						"1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Sucursal 1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add product into branch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Producto X\",\r\n  \"stock\": 2500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update stock",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/1/3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"1",
+						"3000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get maximum stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/max/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"max",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update product Name",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t  \"name\": \"Producto ABC\"\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products/7?name=Producto # 1\"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"7"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Producto "
+						}
+					],
+					"hash": " 1\""
+				}
+			},
+			"response": []
+		}
+	]
+}loading Seti-API.postman_collection.json…]()
+
+
 
 
 Algunas ejecuciones de Sevicios desde Postman:
