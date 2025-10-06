@@ -130,7 +130,7 @@ Todas las funcionalidades de la API están contempladas en los siguientes servic
 Servicios de la API
 ------------------------
 
-1	Adicionar una Franqucia:
+1	Adicionar una Franquicia:
 ----------------------------------
 
 	Protocol: POST
@@ -276,9 +276,9 @@ Servicios de la API
 10 	Actualizar nombre de un producto
 ----------------------------------------
 	Protocol: PUT
-	EndPoint: http://localhost:8080/api/products/{id}"
+	EndPoint: http://localhost:8080/api/products/{id}?name={nuevo nombre}"
 	
-	Ejemplo: http://localhost:8080/api/products/7
+	Ejemplo: http://localhost:8080/api/products/7?name="nuevo nombre"
    
 	JsonRequest:
 	{
