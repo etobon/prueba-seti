@@ -74,7 +74,12 @@ Todo el funcionamiento de los servicios de la capa Aplicaction (Services: Franch
 5 Pruebas Unitarias en Servicios (deben superar el 80% de cobertura):
 -------------------------------------------------------------------------
 
-Todos los servicios de la capa Application tienen cobertura del 85%, pruebas unitarias realizadas con Junit & Mockito, gracias al plugin de Jacoco, se puede observar la cobertura en formato HTML del site
+Todos los servicios de la capa Application tienen cobertura del 85%, pruebas unitarias realizadas con Junit & Mockito, gracias al plugin de Jacoco, se puede observar la cobertura en formato HTML del site.
+Comando para generar .jar incluyendo generacion de Site con Cobertura de Pruebas Unitarias:
+
+Desde consola git_bash (preferible): ./mvnw clean install
+------
+
 <img width="1907" height="404" alt="image" src="https://github.com/user-attachments/assets/e3350c13-e283-4e9c-beb4-58ff3378f0d8" />
 
 
