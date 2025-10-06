@@ -1,4 +1,4 @@
-[Seti-API.postman_collection.json](https://github.com/user-attachments/files/22728870/Seti-API.postman_collection.json)Prueba de Ingreso Seti: (Desarrollo de Api-Rest Spring WebFlux)
+Prueba de Ingreso Seti: (Desarrollo de Api-Rest Spring WebFlux)
 ------------------------------
 
 Ejercicio # 1:
@@ -121,6 +121,8 @@ Ya con esos pasos, los dos contendedores estan arriba y se pueden consumir los s
 
 Consumo servicios desde Postman:
 --------
+[Seti-API.postman_collection.json](https://github.com/user-attachments/files/22728870/Seti-API.postman_collection.json)
+
 <img width="1280" height="701" alt="image" src="https://github.com/user-attachments/assets/9e4fead5-b125-4562-a374-2328bbfacf89" />
 
 Todas las funcionalidades de la API están contempladas en los siguientes servicios:
